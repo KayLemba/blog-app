@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_25_151032) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["posts_id"], name: "index_comments_on_posts_id"
-    t.index ["users_id"], name: "index_comments_on_users_id"
+    t.index ["author_id"], name: "index_comments_on_author_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_25_151032) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["posts_id"], name: "index_likes_on_posts_id"
-    t.index ["users_id"], name: "index_likes_on_users_id"
+    t.index ["author_id"], name: "index_likes_on_author_id"
   end
 
   create_table "posts", force: :cascade do |t|
