@@ -32,6 +32,8 @@ To get a local copy up and running follow these simple example steps.
 sudo -u postgres createuser blog -s
 # Create the database
 rake db:create
+# Create database Migration
+rails db:migrate
 ```
 
 ### Install
