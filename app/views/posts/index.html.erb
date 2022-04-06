@@ -1,1 +1,52 @@
-<h1>Here is a list of posts for a given user</h1>
+<div class='container'>
+    <div class="card mb-3 border-info mb-3 " style="max-width: 900px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src=<% @user.photo%> class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">
+              <h1><%= @user.name %></h1>
+            </h5>
+            <p class="card-text"><%=  @user.bio  %></p>
+            <p class="card-text text-end"><small class="text-muted">Number of posts: <%=  @user.Posts_Counter  %></small></p>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div class='u-detail-rec-posts'>
+        <% @posts.each  do |post| %>
+            <div class="card border-info mb-3" style="max-width: 900px;">
+              <div class="card-header bg-info">Post: <%= link_to "#{post.title}", user_post_path(@user.id, post.id), class: 'post-link' %></div>
+              <div class="container">
+                <div class="card-body text-dark">
+                  <h5 class="card-title">Dark card title</h5>
+                  <p class="card-text"><%= post.text %></p>
+                  <p class="card-text text-end"><small class="text-muted"> Likes: <%= post.Likes_Counter %> </small></p>
+                </div>
+              </div>
+
+              <div class="card border-info mb-3" style="width: 840px; margin: 0 auto; margin-bottom: 2rem;">
+                <div class="card-header bg-info">
+                  Comments: <%= post.Comments_Counter %>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <% post.recent_comments.each do |comment| %>
+                      <% if post.id === comment.post_id %>
+                        <li class="list-group-item ">
+                          <%= comment.author.name %>: <%= comment.text  %>
+                        </li>
+                      <% end %>
+                  <% end %>
+                </ul>
+              </div>
+            </div>            
+        <% end %>
+
+        <button class="btn btn-outline-info">
+          Pagination
+        </button>
+    </div>
+</div>

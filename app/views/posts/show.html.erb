@@ -1,1 +1,25 @@
-<h1>Here is a detailed page of a post</h1>
+<div class="container" style="margin: 2rem auto;">
+  <div class="card border-info mb-3" style="max-width: 900px;">
+    <div class="card-header bg-info"><%= @post.title %> by <%= @post.author.name %></div>
+    <div class="container">
+    <div class="card-body text-dark">
+        <h5 class="card-title"><%= @post.title %></h5>
+        <p class="card-text"><%= @post.text %></p>
+        <p class="card-text text-end"><small class="text-muted"> Likes: <%= @post.Likes_Counter %> </small></p>
+    </div>
+    </div>
+  
+    <div class="card border-info mb-3" style="width: 840px; margin: 0 auto; margin-bottom: 2rem;">
+    <div class="card-header bg-info">
+        Comments: <%= @post.Comments_Counter %>
+    </div>
+    <ul class="list-group list-group-flush">
+        <% @comments.each do |comment| %>
+            <li class="list-group-item ">
+                <%= comment.author.name %>: <%= comment.text  %>
+            </li>
+        <% end %>
+    </ul>
+    </div>
+  </div>
+</div>
