@@ -1,52 +1,54 @@
-<div class='container'>
-    <div class="card mb-3 border-info mb-3 " style="max-width: 900px;">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img src=<% @user.photo%> class="img-fluid rounded-start" alt="...">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">
-              <h1><%= @user.name %></h1>
-            </h5>
-            <p class="card-text"><%=  @user.bio  %></p>
-            <p class="card-text text-end"><small class="text-muted">Number of posts: <%=  @user.Posts_Counter  %></small></p>
-          </div>
-        </div>
+<h1>Posts</h1>
+
+<ul>
+  <li>
+    <div class="card">
+      <div>
+        <%= image_tag ("#{@user.photo}") %>
       </div>
-    </div> 
-
-    <div class='u-detail-rec-posts'>
-        <% @posts.each  do |post| %>
-            <div class="card border-info mb-3" style="max-width: 900px;">
-              <div class="card-header bg-info">Post: <%= link_to "#{post.title}", user_post_path(@user.id, post.id), class: 'post-link' %></div>
-              <div class="container">
-                <div class="card-body text-dark">
-                  <h5 class="card-title">Dark card title</h5>
-                  <p class="card-text"><%= post.text %></p>
-                  <p class="card-text text-end"><small class="text-muted"> Likes: <%= post.Likes_Counter %> </small></p>
-                </div>
-              </div>
-
-              <div class="card border-info mb-3" style="width: 840px; margin: 0 auto; margin-bottom: 2rem;">
-                <div class="card-header bg-info">
-                  Comments: <%= post.Comments_Counter %>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <% post.recent_comments.each do |comment| %>
-                      <% if post.id === comment.post_id %>
-                        <li class="list-group-item ">
-                          <%= comment.author.name %>: <%= comment.text  %>
-                        </li>
-                      <% end %>
-                  <% end %>
-                </ul>
-              </div>
-            </div>            
-        <% end %>
-
-        <button class="btn btn-outline-info">
-          Pagination
-        </button>
+      <h2>
+        <%= @user.name %>
+      </h2>
+      <p>Number of posts: <%= @user.posts_counter %></p>
     </div>
-</div>
+  </li>
+</ul>
+
+  <ul>
+      <% @user.posts.each do |post| %>
+      <%= link_to   user_post_path(@user.id, post.id) do %>
+        <li>
+          <div class='post-card'>
+            <div>
+              <h3>
+                <%= post.title %>
+              </h3>
+            </div>
+            <p>
+              <%= post.text %>
+            </p>
+            <div>
+              <span>Comments:
+                <%= post.comments_counter %>
+              </span>
+              <span> Likes:
+                <%= post.likes_counter %>
+              </span>
+            </div>
+            <div class="comment">
+            
+            
+            <% post.comments.each do |comment| %>
+              <p>
+            <%= comment.text %>
+            </p>
+            <% end %>
+            
+            </div>
+          </div>
+        </li>
+        <% end %>
+      <% end %>
+    </ul>
+
+    <%= link_to 'Create Post', new_user_post_path, class:'btn' %>

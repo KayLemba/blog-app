@@ -1,38 +1,50 @@
-<div class="container">
-    <div class="card mb-3 border-info mb-3" style="max-width: 900px">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img src=<%@user.name%> class="img-fluid rounded-start">
+<div class="show-user">
+  <h1>Show User Data</h1>
+  <ul>
+    <li>
+      <div class="card">
+        <div>
+          <%= image_tag ("#{@user.photo}") %>
         </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">
-              <h1><%= @user.name %></h1>
-            </h5>
-            <p class="card-text"><%=  @user.bio  %></p>
-            <p class="card-text text-end"><small class="text-muted">Number of posts: <%=  @user.Posts_Counter  %></small></p>
-          </div>
-        </div>
+        <h2>
+          <%= @user.name %>
+        </h2>
+        <p>Number of posts: <%= @user.posts_counter %></p>
       </div>
-    </div> 
-
-    <div style="margin-bottom: 2rem;">
-      <% @user.recent_posts.each  do |post| %>
-        <% if @user.id === post.users_id %>
-          <div class="c">
-            <div class="card border-info mb-3" style="max-width: 900px;">
-              <div class="card-header bg-info">Post: <%= link_to "#{post.title}", user_post_path(@user.id, post.id), class:"link-dark" %></div>
-              <div class="card-body text-dark">
-                <h5 class="card-title">Dark card title</h5>
-                <p class="card-text"><%= post.text %></p>
-                <p class="card-text text-end"><small class="text-muted"> Comments: <%= post.Comments_Counter %> Likes: <%= post.Likes_Counter %> </small></p>
-              </div>
+    </li>
+  </ul>
+  <div>
+    <h3>Bio</h3>
+    <p>
+      <%= @user.bio %>
+    </p>
+  </div>
+  <div>
+    <h2>Posts:</h2>
+    <ul>
+      <% @user.return_three_posts.each do |post| %>
+        <li>
+          <div class='post-card'>
+            <div>
+              <h3>
+                <%= post.title %>
+              </h3>
+            </div>
+            <p>
+              <%= post.text %>
+            </p>
+            <div>
+              <span>Comments:
+                <%= post.comments_counter %>
+              </span>
+              <span> Likes:
+                <%= post.likes_counter %>
+              </span>
             </div>
           </div>
-        <% end %>
+        </li>
       <% end %>
-      <button class="btn btn-outline-info">
-        <%= link_to 'See all Posts', user_posts_path(@user), class:"nav-link"%>
-      </button>
-    </div>
+    </ul>
+  </div>
+  <%= link_to 'See all posts', user_posts_path(@user.id) , class:'btn'%>
 </div>
