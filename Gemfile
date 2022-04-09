@@ -27,6 +27,7 @@ gem 'stimulus-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
+gem 'rubocop', '>= 1.0', '< 2.0'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -64,11 +65,18 @@ group :development do
   # gem "spring"
 end
 
+gem 'htmlbeautifier'
+
+gem 'rails-controller-testing'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 5.0.0'
+end
+
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
-  gem 'rails-controller-testing'
-  gem 'rspec-rails', '>= 3.9.0'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'bullet', group: 'development'
 end
