@@ -1,5 +1,5 @@
 class Like < ApplicationRecord
-  belongs_to :author, class_name: 'User', foreign_key: 'users_id'
+  belongs_to :user
   belongs_to :post
 
   after_create :update_likes_counter
@@ -7,6 +7,6 @@ class Like < ApplicationRecord
   private
 
   def update_likes_counter
-    post.increment!(:Likes_Counter)
+    post.increment!(:likes_counter)
   end
 end
