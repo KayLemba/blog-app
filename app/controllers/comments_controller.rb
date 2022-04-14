@@ -1,19 +1,23 @@
 class CommentsController < ApplicationController
   def create
-    post = Post.find(params[:id])
-    comment = current_user.comments.new(comment_params)
-    comment.post = post
-    if comment.save!
-      flash[:success] = 'Your comment was added'
-    else
-      flash[:error] = 'Your comment was not added'
+    post = Post.find(params[:post_id])
+    comment = post.comments.new(text: comment_params[:text], user: current_user)
+
+    respond_to do |format|
+      format.html do
+        if comment.save
+          redirect_to user_post_path(post.user.id, post.id), notice: 'Comment was successfully created.'
+        else
+          flash[:alert] = 'Failed to add comment!'
+          redirect_to user_post_path(post.user.id, post.id)
+        end
+      end
     end
-    redirect_to user_post_path
   end
 
   private
 
   def comment_params
-    params.permit(:text)
+    params.require(:comment).permit(:text)
   end
 end

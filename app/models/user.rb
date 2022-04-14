@@ -1,12 +1,16 @@
 class User < ApplicationRecord
-  has_many :posts
-  has_many :likes
-  has_many :comments
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :confirmable
+  validates :name, :email, presence: true
+  validates :posts_counter, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  validates :name, presence: true
-  validates :posts_counter, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
-  def return_three_posts
-    posts.order('created_at Desc').limit(3)
+  def recent_posts(limit = 3)
+    posts.includes(:comments).last(limit)
   end
 end

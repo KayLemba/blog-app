@@ -1,17 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validations' do
+    subject { User.new name: 'Daniel Matongo' }
 
-  subject do
-    user = User.new(name: 'Tom', photo: 'image.png', bio: 'I am programmer', posts_counter: 0)
-    Post.new(title: 'Hello world', text: 'Helloworld',
-             likes_counter: 0, comments_counter: 0, user: user)
+    before { subject.save }
+
+    it 'return a name' do
+      subject.name = nil
+      expect(subject).to_not be_valid
+    end
+
+    it 'should have posts > 0' do
+      subject.posts_counter = -1
+      expect(subject).to_not be_valid
+    end
   end
 
-  before { subject.save }
+  describe 'recent posts' do
+    subject { User.first }
 
-  it 'should check validation' do
-    expect(subject).to be_valid
+    it 'return 3 posts' do
+      expect(subject.recent_posts.length).to eq(3)
+    end
   end
 end
