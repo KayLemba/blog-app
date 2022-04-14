@@ -1,7 +1,7 @@
 # Blog App
 
-> Classic blog website
-![screenshot](screenshots/1.png)
+>  Blog website
+![screenshot]()
 
 A simple blog app built using the Ruby on Rails framework.
 
@@ -30,11 +30,10 @@ To get a local copy up and running follow these simple example steps.
 ```sh
 # Create user
 sudo -u postgres createuser blog -s
-```
-
-```sh
-# test the view
-rake db:reset # this will drop the database, create it, and load the schema and run the seed data
+# Create the database
+rake db:create
+# Create database Migration
+rails db:migrate
 ```
 
 ### Install
@@ -52,25 +51,16 @@ rails s
 ### Test
 
 ```sh
-rake rspec
-```
-#### IF TESTS FAIL
-```sh
-RAILS_ENV=test rake db:reset
-``
-<br>
-then
-<br>
-```sh
-rake db:seed
+rspec
 ```
 
 ## Author
 
-👤 **Daniel M. Matongo**
+👤 **Kalolo Chola Lemba**
+- GitHub: [@KayLemba ](https://github.com/KayLemba)
+- Twitter: [@King-Kaylo1 ](https://twitter.com/King_Kaylo1) 
+- LinkedIn: [@kalolo-lemba](https://www.linkedin.com/in/https://www.linkedin.com/in/kalolo-lemba)
 
-- GitHub: [@mmatongo](https://github.com/mmatongo)
-- LinkedIn: [Daniel M. matongo](https://linkedin.com/in/mmatongo)
 
 ## 🤝 Contributing
 
