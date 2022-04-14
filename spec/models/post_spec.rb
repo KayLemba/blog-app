@@ -1,47 +1,78 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  subject do
-    user = User.new(name: 'Tom', photo: 'image.png', bio: 'I am programmer', posts_counter: 0)
-    Post.new(title: 'Hello world', text: 'Helloworld',
-             likes_counter: 0, comments_counter: 0, user: user)
+  describe 'validations' do
+    subject { Post.new(title: 'title', text: 'body', user_id: 0) }
+
+    before { subject.save }
+
+    it 'should have a title' do
+      subject.title = nil
+      expect(subject).to_not be_valid
+    end
+
+    it 'should have a body' do
+      subject.text = nil
+      expect(subject).to_not be_valid
+    end
+
+    it 'should have a user_id' do
+      subject.user_id = nil
+      expect(subject).to_not be_valid
+    end
+
+    it 'should have a body less than or equal to 250 characters' do
+      subject.text = 'a' * 251
+      expect(subject).to_not be_valid
+    end
+
+    it 'should have a title less than or equal to 50 characters' do
+      subject.title = 'a' * 51
+      expect(subject).to_not be_valid
+    end
+
+    it 'should have positive likes' do
+      subject.likes_counter = -1
+      expect(subject).to_not be_valid
+    end
+
+    it 'should have positive comments' do
+      subject.comments_counter = -1
+      expect(subject).to_not be_valid
+    end
   end
 
-  before { subject.save }
+  describe 'associations' do
+    it 'should have many comments' do
+      assc = described_class.reflect_on_association(:comments)
+      expect(assc.macro).to eq :has_many
+    end
 
-  it 'should check validation' do
-    expect(subject).to be_valid
+    it 'should have many likes' do
+      assc = described_class.reflect_on_association(:likes)
+      expect(assc.macro).to eq :has_many
+    end
+
+    it 'should belong to a user' do
+      assc = described_class.reflect_on_association(:user)
+      expect(assc.macro).to eq :belongs_to
+    end
   end
 
-  it 'should have 250 characters' do
-    subject.title = 'f' * 300
-    expect(subject).to_not be_valid
+  describe 'recent comments' do
+    subject { Post.first }
+
+    it 'should have 3 recent comments' do
+      expect(subject.recent_comments.length).to eq 3
+    end
   end
 
-  it 'should be invalid if comment counter is nil' do
-    subject.comments_counter = nil
-    expect(subject).to_not be_valid
-  end
+  describe 'update counter' do
+    subject { Post.first }
 
-  it 'should be invalid if like counter is nil' do
-    subject.likes_counter = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'should return most recent comments' do
-    user = User.new(name: 'Tom', photo: 'image.png', bio: 'I am programer', posts_counter: 0)
-    comment2 = subject.comments.create!(user: user, text: 'hi')
-    comment3 = subject.comments.create!(user: user, text: 'hi')
-    comment4 = subject.comments.create!(user: user, text: 'hi')
-    comment5 = subject.comments.create!(user: user, text: 'Hi')
-    comment6 = subject.comments.create!(user: user, text: 'hi')
-
-    comments = subject.return_five_comments
-    expect(comments.length).to eql 5
-    expect(comments).to match_array([comment6, comment5, comment4, comment3, comment2])
-  end
-
-  it 'should update user post  counter' do
-    expect(subject.user.posts_counter).to eql 1
+    it 'should update posts counter' do
+      subject.update_count(2)
+      expect(subject.user.posts_counter).to eq 2
+    end
   end
 end

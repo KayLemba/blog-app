@@ -1,16 +1,8 @@
 class Comment < ApplicationRecord
   belongs_to :user
-  belongs_to :post
+  belongs_to :post, counter_cache: :comments_counter
 
-  after_save :update_post_comment_count
-
-  def recent_comments
-    comments.order('created_at Des').limit(5)
-  end
-
-  private
-
-  def update_post_comment_count
-    post.increment!(:comments_counter)
+  def update_count(count)
+    post.update(comments_counter: count)
   end
 end

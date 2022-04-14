@@ -1,7 +1,7 @@
 # Blog App
 
 >  Blog website
-![screenshot](work1.png)
+![screenshot]()
 
 A simple blog app built using the Ruby on Rails framework.
 
