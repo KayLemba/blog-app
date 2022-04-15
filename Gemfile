@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.3'
+ruby '3.0.3'
 gem 'cancancan'
 gem 'devise'
 gem 'devise-jwt'
@@ -29,13 +29,16 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'rails-controller-testing'
-gem 'rspec-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
-
+# Adding for API documentation creation
+gem 'rswag-api'
+gem 'rswag-ui'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails'
+  gem 'rswag-specs'
   gem 'database_cleaner-active_record'
   gem 'factory_bot_rails'
   gem 'faker'
