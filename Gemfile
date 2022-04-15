@@ -37,11 +37,11 @@ gem 'rswag-ui'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails'
-  gem 'rswag-specs'
   gem 'database_cleaner-active_record'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'rspec-rails'
+  gem 'rswag-specs'
 end
 
 group :development do
