@@ -306,6 +306,9 @@ DEPENDENCIES
   rails-controller-testing
   rspec-rails
   rswag
+  rswag-api
+  rswag-specs
+  rswag-ui
   sass-rails (>= 6)
   selenium-webdriver
   spring
@@ -316,7 +319,7 @@ DEPENDENCIES
   webpacker (~> 5.0)
 
 RUBY VERSION
-   ruby 2.7.3p183
+   ruby 3.0.3p157
 
 BUNDLED WITH
-   2.2.32
+   2.3.11

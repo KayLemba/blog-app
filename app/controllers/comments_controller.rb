@@ -29,6 +29,26 @@ class CommentsController < ApplicationController
     end
   end
 
+  def comments
+    post = Post.find(params[:id])
+
+    respond_to do |format|
+      format.json { render json: post.comments }
+    end
+  end
+
+  def add_comment
+    comment = Comment.new(author: @current_user, post_id: params[:post_id], text: params[:text])
+
+    respond_to do |format|
+      if comment.save
+        format.json { render json: comment }
+      else
+        format.json { render json: { success: false, message: comment.errors.full_messages } }
+      end
+    end
+  end
+
   private
 
   def comment_params

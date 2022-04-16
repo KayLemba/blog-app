@@ -53,6 +53,10 @@ The project requirements can be viewed [here](https://github.com/microverseinc/c
 
 The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/blog_app_api_endpoints.md)
 
+### Phase 12 - API documentation
+
+The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/blog_app_api_documentation.md)
+
 ## Built With
 
 - Ruby on Rails
@@ -101,6 +105,10 @@ rails s
 ```sh
 rspec
 ```
+
+### API integration rswag
+
+run: `rake rswag:specs:swaggerize`
 
 ## Author
 
