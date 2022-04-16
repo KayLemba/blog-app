@@ -29,7 +29,6 @@ class CommentsController < ApplicationController
     end
   end
 
-
   def comments
     post = Post.find(params[:id])
 
