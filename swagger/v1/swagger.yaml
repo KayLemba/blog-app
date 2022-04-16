@@ -9,8 +9,6 @@ paths:
       summary: Creates a comment
       tags:
       - Comments
-      security:
-      - Bearer: {}
       parameters: []
       responses:
         '201':
@@ -111,44 +109,6 @@ paths:
               required:
               - user_id
               - post_id
-  "/api/login":
-    post:
-      summary: Logs in
-      tags:
-      - Log in
-      parameters: []
-      responses:
-        '200':
-          description: returns tocken
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-        '401':
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                password:
-                  type: integer
-              required:
-              - email
-              - password
   "/api/posts":
     get:
       summary: Gets posts
@@ -208,4 +168,4 @@ servers:
 - url: https://{defaultHost}
   variables:
     defaultHost:
-      default: www.example.com
+      default: localhost:3000

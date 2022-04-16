@@ -9,7 +9,6 @@ RSpec.describe 'Posts API' do
       tags 'Comments'
       consumes 'application/json'
       produces 'application/json'
-      security [Bearer: {}]
       parameter name: :comment, in: :body, schema: {
         type: :object,
         properties: {
@@ -31,7 +30,7 @@ RSpec.describe 'Posts API' do
                }
 
         let(:user1) do
-          User.create!(name: 'Tim', email: 'tim@example.com', password: '123456', confirmed_at: Time.now, posts_counter: 3,
+          User.create!(name: 'Tim', email: 'tim@example.com', password: '123456', confirmed_at: Time.now, posts_counter: 2,
                        bio: 'I am a full-stack web developer from Germany')
         end
         let(:post1) do
@@ -53,7 +52,7 @@ RSpec.describe 'Posts API' do
                }
 
         let(:user1) do
-          User.create!(name: 'Tim', email: 'tim@example.com', password: '123456', confirmed_at: Time.now, posts_counter: 3,
+          User.create!(name: 'Tim', email: 'tim@example.com', password: '123456', confirmed_at: Time.now, posts_counter: 2,
                        bio: 'I am a full-stack web developer from Germany')
         end
         let(:post1) do
@@ -93,7 +92,7 @@ RSpec.describe 'Posts API' do
                }
 
         let(:user1) do
-          User.create!(name: 'Tim', email: 'tim@example.com', password: '123456', confirmed_at: Time.now, posts_counter: 3,
+          User.create!(name: 'Tim', email: 'tim@example.com', password: '123456', confirmed_at: Time.now, posts_counter: 2,
                        bio: 'I am a full-stack web developer from Germany')
         end
         let(:post1) do
@@ -117,7 +116,7 @@ RSpec.describe 'Posts API' do
                }
 
         let(:user1) do
-          User.create!(name: 'Tim', email: 'tim@example.com', password: '123456', confirmed_at: Time.now, posts_counter: 3,
+          User.create!(name: 'Tim', email: 'tim@example.com', password: '123456', confirmed_at: Time.now, posts_counter: 2,
                        bio: 'I am a full-stack web developer from Germany')
         end
         let(:post1) do

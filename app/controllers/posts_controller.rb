@@ -55,6 +55,14 @@ class PostsController < ApplicationController
     redirect_to user_path(user.id)
   end
 
+  def posts
+    user = User.find(params[:user_id])
+
+    respond_to do |format|
+      format.json { render json: user.posts }
+    end
+  end
+
   private
 
   def post_params
